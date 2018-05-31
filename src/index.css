@@ -1,0 +1,64 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  width: 100%;
+  min-height:100%; /* needed for container min-height */
+}
+
+#root {
+  min-height: 100%;
+  min-width: 100%;
+}
+
+.root-container {
+  position: absolute;
+  min-height: 100%;
+  min-width: 100%;
+}
+
+.loading-screen {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+  position: absolute;
+  background: pink;
+  min-height: 100%;
+  min-width: 100%;
+}
+
+.app-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  min-height: 100%;
+  min-width: 100%;
+  flex-direction: column;
+  background: #87CEFA;
+  position: absolute;
+}
+
+.weather-container {
+  background: white;
+  margin: 155px;
+  height: 65vh;
+  width: 65vw;
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.table-row-one, .table-row-two {
+  flex: 1;
+  display: flex;
+}
+
+td {
+  border: 1px solid black;
+  padding: 5px;
+  flex: 1;
+}
