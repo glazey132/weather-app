@@ -1,13 +1,17 @@
 const mongoose = require('mongoose');
 
-var cityListSchema = mongoose.Schema({
-	id: {
-		type: Number
-	}
+var cityListItemSchema = mongoose.Schema({
+	id: { type: Number },
+	name: { type: String },
+	country: { type: String },
+	coord: { type: [{
+		lon: { type: Number },
+		lat: { type: Number }
+	}] }
 });
 
-var CityList = mongoose.model('CityList', cityListSchema);
+var CityListItem = mongoose.model('citylist', cityListItemSchema);
 
 module.exports = {
-	CityList: CityList
+	CityListItem: CityListItem
 };

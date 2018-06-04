@@ -3,6 +3,7 @@ import WeatherAppContainer from './containers/WeatherAppContainer.js';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton'
 import { connect } from 'react-redux';
+import axios from 'axios';
 // import Button from 'material-ui/Button';
 
 import {
@@ -18,33 +19,50 @@ class App extends React.Component {
 		};
 	}
 
-	async onClickSearch() {
+	async getCityNameByPosition(pos) {
+		const {
+			latitude,
+			longitude
+		} = pos.coords;
+
 		try {
-			//axios
-			//let weather = axios
-			console.log('the props ', this.props);
-			console.log('the state ', this.state);
-		}
-		catch(error) {
-			console.log('error on click search ', error);
+			let cityName = await axios('/getWeather/location', {
+				params: { lat: latitude, long: longitude }
+			})
+			console.log('await axios data ', cityName);
+		} catch (e) {
+			console.error(e);
 		}
 	}
 
-	componentDidMount(){
-		navigator.geolocation.getCurrentPosition((position) => {
-			if (!position) {
-				this.props.onLocationFail(`There was an error getting the user's location`)
-			} else {
-				console.log('this.props is ', this.props);
-				this.props.onLocation(position.coords.latitude, position.coords.longitude);
-			}
-		})
+
+
+	componentDidMount() {
+			navigator.geolocation.getCurrentPosition(position => {
+				if (! position) {
+					console.log('could not get position on mount ');
+					const err = 'could not get position on mount ';
+					this.props.onLocationFail(err)
+				} else {
+					console.log('geo success ', position);
+					this.props.onLocation(position.coords.latitude, position.coords.longitude)
+					this.getCityNameByPosition(position);
+				}
+			});
 	}
 
-	// shouldComponentUpdate(nextProps, nextState) {
-	// 	console.log('in shouldComponentUpdate are props the same? ', this.props, nextProps);
-	// 	console.log('are shouldComponentUpdate states the same? ', this.state, nextState);
+	// onClickSearch() {
+	// 	try {
+	// 		//axios
+	// 		//let weather = axios
+	// 		console.log('the props ', this.props);
+	// 		console.log('the state ', this.state);
+	// 	}
+	// 	catch(error) {
+	// 		console.log('error on click search ', error);
+	// 	}
 	// }
+
 
 	render() {
 		if(this.props.loading) {
@@ -74,7 +92,6 @@ class App extends React.Component {
 				</div>
 			);
 		}
-
 	}
 }
 
