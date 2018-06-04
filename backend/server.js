@@ -7,6 +7,7 @@ app.use(bodyParser.json());
 
 //Mongoose
 const mongoose = require('mongoose');
+const CityList = require('./models/models').CityList;
 
 if (! process.env.MONGODB_URI) {
   throw new Error("MONGODB_URI is not in the environmental variables. Try running 'source env.sh'");
@@ -30,8 +31,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-	console.log('express is working! Hello world.');
-	res.send('Hello world')
+	res.json({success: true, message: 'Your server is online. Hello World.🌎'})
+});
+
+app.get('/getWeather/:searchTerm', (req, res) => {
+  console.log('the search term ', req.params.searchTerm);
 });
 
 var SERVER_PORT = process.env.SERVER_PORT || 8080;
