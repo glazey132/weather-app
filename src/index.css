@@ -38,7 +38,6 @@ html, body {
   min-width: 100%;
   flex-direction: column;
   background: #87CEFA;
-  position: absolute;
 }
 
 .weather-container {
@@ -48,17 +47,31 @@ html, body {
   width: 65vw;
   border: 2px solid black;
   display: flex;
-  justify-content: center;
   flex-direction: column;
 }
 
-.table-row-one, .table-row-two {
-  flex: 1;
+.top-row {
+  border: 1px solid black;
   display: flex;
+  min-height: 50%;
+  height: 50%;
 }
 
-td {
+.left-column {
   border: 1px solid black;
-  padding: 5px;
   flex: 1;
+}
+
+.right-column {
+  border: 1px solid black;
+  flex: 1;
+}
+
+.five-day-forecast {
+  display: flex;
+  flex: 1;
+}
+
+.page-container {
+  background: pink;
 }
