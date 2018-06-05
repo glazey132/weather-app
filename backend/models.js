@@ -2,12 +2,15 @@ const mongoose = require('mongoose');
 
 var cityListSchema = mongoose.Schema({
 	id: {
-		type: Number
+		type: String
+	},
+	name: {
+		type: String
 	}
-});
+})
 
-var CityList = mongoose.model('CityList', cityListSchema);
+var CityListItem = mongoose.model('Citylist', cityListSchema, 'citylist');
 
 module.exports = {
-	CityList: CityList
+	CityListItem
 };
