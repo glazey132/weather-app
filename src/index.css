@@ -11,13 +11,36 @@ html, body {
   min-width: 100%;
 }
 
+.main-img-container {
+  min-height: 100%;
+  flex: 1;
+  display: flex;
+}
+
+.main-img {
+  min-width: 100%;
+}
+
+.weather-img-loading-container {
+  background: yellow;
+  padding: 5px;
+  height: 100%;
+}
+
+.today-weather {
+  display: block;
+  height: 100%;
+  text-align: center;
+  margin: 1em;
+}
+
 .root-container {
   position: absolute;
   min-height: 100%;
   min-width: 100%;
 }
 
-.loading-screen {
+.location-loading-screen {
   display: flex;
   justify-content: center;
   height: 100%;
@@ -26,6 +49,21 @@ html, body {
   background: pink;
   min-height: 100%;
   min-width: 100%;
+  font-family: "Arial Black", Gadget, sans-serif;
+  color: white;
+}
+
+.weather-loading-screen {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+  position: absolute;
+  background: pink;
+  min-height: 100%;
+  min-width: 100%;
+  font-family: "Arial Black", Gadget, sans-serif;
+  color: #FFFE00;
 }
 
 .app-screen {
@@ -60,6 +98,7 @@ html, body {
 .left-column {
   border: 1px solid black;
   flex: 1;
+  display: flex;
 }
 
 .right-column {
@@ -70,6 +109,10 @@ html, body {
 .five-day-forecast {
   display: flex;
   flex: 1;
+}
+
+.five-day-container {
+  width: 100%;
 }
 
 .page-container {

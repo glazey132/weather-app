@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 
-export const fetchGeolocation = (lat, long) => {
+export const fetchGeolocationSuccess = (lat, long) => {
 	return {
 		type: types.GEOLOCATION_SUCCESS,
 		payload: { lat, long }

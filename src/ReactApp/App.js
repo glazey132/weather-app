@@ -3,11 +3,10 @@ import WeatherAppContainer from './containers/WeatherAppContainer.js';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton'
 import { connect } from 'react-redux';
-import axios from 'axios';
 // import Button from 'material-ui/Button';
 
 import {
-	fetchGeolocation,
+	fetchGeolocationSuccess,
 	fetchGeolocationFailure
 } from './actions/get_geolocation';
 
@@ -19,36 +18,18 @@ class App extends React.Component {
 		};
 	}
 
-	async getCityNameByPosition(pos) {
-		const {
-			latitude,
-			longitude
-		} = pos.coords;
-
-		try {
-			let cityName = await axios('/getWeather/location', {
-				params: { lat: latitude, long: longitude }
-			})
-			console.log('await axios data ', cityName);
-		} catch (e) {
-			console.error(e);
-		}
-	}
-
 
 
 	componentDidMount() {
-			navigator.geolocation.getCurrentPosition(position => {
-				if (! position) {
-					console.log('could not get position on mount ');
-					const err = 'could not get position on mount ';
-					this.props.onLocationFail(err)
-				} else {
-					console.log('geo success ', position);
-					this.props.onLocation(position.coords.latitude, position.coords.longitude)
-					this.getCityNameByPosition(position);
-				}
-			});
+		navigator.geolocation.getCurrentPosition(position => {
+			if (! position) {
+				const err = 'could not get position on mount ';
+				this.props.onLocationFail(err)
+			} else {
+				this.props.onLocation(position.coords.latitude, position.coords.longitude)
+				// this.getCityInfoByPosition(position);
+			}
+		});
 	}
 
 	// onClickSearch() {
@@ -65,15 +46,17 @@ class App extends React.Component {
 
 
 	render() {
-		if(this.props.loading) {
+		if(this.props.isLocationLoading) {
 			return (
-				<div className='loading-screen'>
+				<div className='location-loading-screen'>
 					<span style={{
 						textAlign: 'center'
-					}}>Loading...</span>
+					}}><h3>Loading your location...</h3></span>
 				</div>
-			)
-		} else {
+			);
+		}
+
+		else if (!this.props.isLocationLoading) {
 			return (
 				<div className='app-screen container-fluid'>
 						<h3> Weather App </h3>
@@ -88,6 +71,9 @@ class App extends React.Component {
 							fullWidth={true}
 							onClick={(event) => this.onClickSearch(event)}
 						/>
+						<span style={{color: 'red'}}>
+							{this.props.error}
+						</span>
 						<WeatherAppContainer/>
 				</div>
 			);
@@ -97,14 +83,15 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
-		loading: state.geoReducer.loading
+		isLocationLoading: state.geoReducer.isLocationLoading,
+		error: state.geoReducer.geoError || state.weatherReducer.weatherError
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onLocation: (lat, long) => dispatch(fetchGeolocation(lat, long)),
-		onLocationFail: (error) => dispatch(fetchGeolocationFailure(error))
+		onLocation: (lat, long) => dispatch(fetchGeolocationSuccess(lat, long)),
+		onLocationFail: (error) => dispatch(fetchGeolocationFailure(error)),
 	}
 };
 

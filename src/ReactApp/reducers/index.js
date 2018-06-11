@@ -2,33 +2,42 @@ import * as types from '../actions/actionTypes';
 import { combineReducers } from 'redux';
 
 const initialState = {
-	weather: [],
 	coords: [],
-	loading: true,
-	error: null
+	location: [],
+	currentWeatherData: {},
+	currentWeatherInfo: {},
+	currentWindData: {},
+	fiveDayForecast: [],
+	isLocationLoading: true,
+	isWeatherLoading: false,
+	geoError: null,
+	weatherError: null
 };
 
 function weatherReducer(state = initialState, action) {
 	switch(action.type) {
 		case types.FETCH_WEATHER_BEGIN:
-			return [
-				...state,
-				{
-					loading: false,
-					coords: [action.payload.lat, action.payload.long]
-				}
-			]
-		case types.FETCH_WEATHER_SUCCESS:
 			return {
 				...state,
-				loading: false,
-				weather: action.payload.weather
+				isLocationLoading: false,
+				isWeatherLoading: true
+			};
+		case types.FETCH_WEATHER_SUCCESS:
+		console.log('fetch weather success in reducer here is weather data?? --> ** --> ', action.payload);
+			return {
+				...state,
+				isWeatherLoading: false,
+				location: action.payload.location,
+				currentWeatherData: action.payload.currentWeatherData,
+				currentWeatherInfo: action.payload.currentWeatherInfo,
+				fiveDayForecast: action.payload.fiveDayForecast,
+				currentWindData: action.payload.windData
 			};
 		case types.FETCH_WEATHER_FAILURE:
 			return {
 				...state,
-				loading: false,
-				error: action.payload.error,
+				isWeatherLoading: false,
+				weatherError: action.payload.error,
 				weather: []
 			};
 		default:
@@ -39,19 +48,17 @@ function weatherReducer(state = initialState, action) {
 function geoReducer(state = initialState, action) {
 	switch(action.type) {
 		case types.GEOLOCATION_SUCCESS:
-		console.log('state in geo reducer ', state);
-		console.log('action.payload in georeducer ', action.payload);
 			return {
 				...state,
 				coords: [action.payload.lat, action.payload.long],
-				loading: false
+				isLocationLoading: false
 			};
 		case types.GEOLOCATION_FAILURE:
 			return {
 				...state,
 				coords: [],
-				loading: false,
-				error: action.payload.error
+				isLocationLoading: false,
+				geoError: action.payload.error
 			};
 		default:
 			return state;
