@@ -84,6 +84,7 @@ html, body {
   min-width: 100%;
   flex-direction: column;
   background: #87CEFA;
+  position: absolute;
 }
 
 .weather-container {

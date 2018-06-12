@@ -1,7 +1,5 @@
 import React from 'react';
 import WeatherAppContainer from './containers/WeatherAppContainer.js';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton'
 import { connect } from 'react-redux';
 // import Button from 'material-ui/Button';
 
@@ -32,19 +30,6 @@ class App extends React.Component {
 		});
 	}
 
-	// onClickSearch() {
-	// 	try {
-	// 		//axios
-	// 		//let weather = axios
-	// 		console.log('the props ', this.props);
-	// 		console.log('the state ', this.state);
-	// 	}
-	// 	catch(error) {
-	// 		console.log('error on click search ', error);
-	// 	}
-	// }
-
-
 	render() {
 		if(this.props.isLocationLoading) {
 			return (
@@ -60,17 +45,6 @@ class App extends React.Component {
 			return (
 				<div className='app-screen container-fluid'>
 						<h3> Weather App </h3>
-						<TextField
-							floatingLabelText="Search for your local weather by entering a city name, zip code or city Id here"
-							fullWidth={true}
-							onChange={(event) => this.setState({citySearch: event.target.value})}
-						/>
-						<RaisedButton
-							primary={true}
-							label="search weather"
-							fullWidth={true}
-							onClick={(event) => this.onClickSearch(event)}
-						/>
 						<span style={{color: 'red'}}>
 							{this.props.error}
 						</span>
