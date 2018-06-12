@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import dayImg from '../../weatherImgs/day.svg';
 // import PropTypes from 'prop-types';
 // import axios from 'axios';
 
@@ -10,7 +9,7 @@ class CurrentWeatherImage extends React.Component {
 		super(props);
 		this.state = {
 			timeOfDay: '',
-			path: '../../../weatherImgs/day.svg'
+			path: ''
 		};
 	}
 
@@ -18,55 +17,128 @@ class CurrentWeatherImage extends React.Component {
 		try {
 			const icon = await this.props.currentWeatherInfo.icon;
 			let iconArr = icon.split('');
-			console.log('icon array? ', iconArr);
-			// axios.get('getWeather/icon', {
-			// 	params: { icon: icon }
-			// })
-			// .then(iconBackendCall => {
-			// 	console.log('the icon backend call response ', iconBackendCall);
-			// 	this.setState({
-			// 		loadedIcon: iconBackendCall.iconSrc,
-			// 		iconLoading: false
-			// 	})
-			// })
-			//
+			let weatherInfo = this.props.currentWeatherInfo;
+			console.log('in current weather image here are icon, iconarr, and weatherinfo: ', icon, iconArr, weatherInfo);
+
 			if (iconArr[2] === 'd') {
-				console.log('its day time!! ');
 				this.setState({ timeOfDay: 'day' })
-				// switch(this.props.currentWeatherInfo.description) {
-				// 	case 'clear sky':
-				// 		this.setState({ loadedIcon = })
-				// 		break;
-				// 	case 'few clouds':
-				// 		do something
-				// 		break;
-				// 	case 'scattered clouds':
-				// 		do something
-				// 		break;
-				// 	case 'broken clouds':
-				// 		do something
-				// 		break;
-				// 	case 'shower rain':
-				// 		do something
-				// 		break;
-				// 	case 'rain':
-				// 		do something
-				// 		break;
-				// 	case 'thunderstorm':
-				// 		do something
-				// 		break;
-				// 	case 'snow':
-				// 		do something
-				// 		break;
-				// 	case 'mist':
-				// 		do something
-				// 		break;
-				// }
+				switch(weatherInfo.description) {
+					case 'clear sky':
+						this.setState({
+							path:  '../../../weatherImgs/day.svg'
+						})
+						break;
+					case 'few clouds':
+						this.setState({
+							path:  '../../../weatherImgs/cloudy-day-1.svg'
+						})
+						break;
+					case 'scattered clouds':
+						this.setState({
+							path:  '../../../weatherImgs/cloudy.svg'
+						})
+						break;
+					case 'broken clouds':
+						this.setState({
+							path:  '../../../weatherImgs/cloudy.svg'
+						})
+						break;
+					case 'shower rain':
+						this.setState({
+							path:  '../../../weatherImgs/rainy-6.svg'
+						})
+						break;
+					case 'rain':
+						this.setState({
+							path:  '../../../rainy-1.svg'
+						})
+						break;
+					case 'thunderstorm':
+						this.setState({
+							path:  '../../../weatherImgs/thunder.svg'
+						})
+						break;
+					case 'snow':
+						this.setState({
+							path:  '../../../weatherImgs/snowy1.svg'
+						})
+						break;
+					case 'mist':
+						this.setState({
+							path:  '../../../weatherImgs/rainy-2.svg'
+						})
+						break;
+					case 'haze':
+						this.setState({
+							path: '../../../weatherImgs/cloudy.svg'
+						})
+						break;
+					default:
+					this.setState({
+						path: '../../../weatherImgs/cloudy.svg'
+					})
+				}
+				console.log('the state in current weather image ', this.state)
 			} else {
-				console.log('its night time!! ');
 				this.setState({ timeOfDay: 'night' })
+				switch(weatherInfo.description) {
+					case 'clear sky':
+						this.setState({
+							path:  '../../../weatherImgs/night.svg'
+						})
+						break;
+					case 'few clouds':
+						this.setState({
+							path:  '../../../weatherImgs/cloudy-night-1.svg'
+						})
+						break;
+					case 'scattered clouds':
+						this.setState({
+							path:  '../../../weatherImgs/cloudy-night-3.svg'
+						})
+						break;
+					case 'broken clouds':
+						this.setState({
+							path:  '../../../weatherImgs/cloudy.svg'
+						})
+						break;
+					case 'shower rain':
+						this.setState({
+							path:  '../../../weatherImgs/rainy-6.svg'
+						})
+						break;
+					case 'rain':
+						this.setState({
+							path:  '../../../rainy-4.svg'
+						})
+						break;
+					case 'thunderstorm':
+						this.setState({
+							path:  '../../../weatherImgs/thunder.svg'
+						})
+						break;
+					case 'snow':
+						this.setState({
+							path:  '../../../weatherImgs/snowy6.svg'
+						})
+						break;
+					case 'mist':
+						this.setState({
+							path:  '../../../weatherImgs/rainy-7.svg'
+						})
+						break;
+					case 'haze':
+						this.setState({
+							path: '../../../weatherImgs/cloudy.svg'
+						})
+						break;
+					default:
+					this.setState({
+						path: '../../../weatherImgs/cloudy.svg'
+					})
+				}
+				console.log('the state in current weather image ', this.state)
 			}
-			console.log('this.state ', this.state);
 		} catch (err) {
 			console.error('frontend error on get icon ', err)
 		}

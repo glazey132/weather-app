@@ -1,13 +1,12 @@
-const { CityListItem } = require('./models');
+// const { CityListItem } = require('./models');
 const axios = require('axios');
 
-function getCityListItem(cityName) {
-	return CityListItem.findOne({ name: cityName }, {_id: 0, id: 1, name: 1, country: 1, coord: 1})
-	.catch(err => console.error('error getting citylist item from db ++ Helper', err))
-}
+// function getCityListItem(cityName) {
+// 	return CityListItem.findOne({ name: cityName }, {_id: 0, id: 1, name: 1, country: 1, coord: 1})
+// 	.catch(err => console.error('error getting citylist item from db ++ Helper', err))
+// }
 
 function getCityWeather(city) {
-	console.log('got city list item from db! and inside helper! ', city);
 	const openWeatherMapApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${process.env.OPEN_WEATHER_MAP_API_KEY}&units=imperial`;
 	return axios.get(openWeatherMapApiUrl)
 	.catch(err => console.error('error calling weather api', err))
@@ -134,7 +133,7 @@ async function handleFiveDayForecast(fiveDayForecast) {
 }
 
 module.exports = {
-	getCityListItem,
+	// getCityListItem,
 	getCityWeather,
 	getFiveDayForecast
 };

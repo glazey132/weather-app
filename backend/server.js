@@ -9,7 +9,6 @@ const axios = require('axios');
 //helper functions loaded from resources file.
 **/
 const {
-  getCityListItem,
   getCityWeather,
   getFiveDayForecast
 } = require('./resources');
@@ -24,30 +23,30 @@ app.use(bodyParser.json());
 /**
 //Mongoose config and mongoose model loaded from models file.
 **/
-const mongoose = require('mongoose');
-const { CityListItem } = require('./models')
+// const mongoose = require('mongoose');
+// const { CityListItem } = require('./models')
 
 /**
 //Ensure presence of correct environemnt variables,
 //connectto mongoose, and apply middleware (bodyparser).
 **/
-if (! process.env.MONGODB_URI) {
-  throw new Error("MONGODB_URI is not in the environmental variables. Try running 'source env.sh'");
-} else {
-	console.log('process.env ', process.env.MONGODB_URI);
-}
-
-mongoose.connection.on('connected', function() {
-  console.log('Success: connected to MongoDb!');
-  console.log('Process.env.MONGODB_URI ', process.env.MONGODB_URI);
-  console.log('Process.env.serverport ', process.env.SERVER_PORT);
-});
-mongoose.connection.on('error', function(err) {
-  console.log('Error connecting to MongoDb: ' + err);
-  process.exit(1);
-});
-
-mongoose.connect(process.env.MONGODB_URI);
+// if (! process.env.MONGODB_URI) {
+//   throw new Error("MONGODB_URI is not in the environmental variables. Try running 'source env.sh'");
+// } else {
+// 	console.log('process.env ', process.env.MONGODB_URI);
+// }
+//
+// mongoose.connection.on('connected', function() {
+//   console.log('Success: connected to MongoDb!');
+//   console.log('Process.env.MONGODB_URI ', process.env.MONGODB_URI);
+//   console.log('Process.env.serverport ', process.env.SERVER_PORT);
+// });
+// mongoose.connection.on('error', function(err) {
+//   console.log('Error connecting to MongoDb: ' + err);
+//   process.exit(1);
+// });
+//
+// mongoose.connect(process.env.MONGODB_URI);
 
 app.use(bodyParser.json());
 
@@ -110,10 +109,15 @@ app.get('/getWeather/location', async (req, res) => {
         console.log('5 day forecast ', fiveDayForecast.data);
         if(fiveDayForecast.data.cod === '200') {
           let day1 = [];
+          let day1WeatherCount = [];
       		let day2 = [];
+          let day2WeatherCount = [];
       		let day3 = [];
+          let day3WeatherCount = [];
       		let day4 = [];
+          let day4WeatherCount = [];
       		let day5 = [];
+          let day5WeatherCount = [];
           let firstDay = fiveDayForecast.data.list[0].dt_txt;
           let firstDate = firstDay[8] + firstDay[9];
           let intDate = parseInt(firstDate);
@@ -134,6 +138,7 @@ app.get('/getWeather/location', async (req, res) => {
           });
           let day1Max;
           day1.forEach(day1Forecast => {
+            day1WeatherCount.push(day1Forecast.weather)
             if (day1Forecast.main.temp > day1Max ||
                 day1Max === undefined) {
               day1Max = day1Forecast.main.temp
@@ -149,6 +154,7 @@ app.get('/getWeather/location', async (req, res) => {
 
           let day2Max;
           day2.forEach(day2Forecast => {
+            day2WeatherCount.push(day2Forecast.weather)
             if (day2Forecast.main.temp > day2Max ||
                 day2Max === undefined) {
               day2Max = day2Forecast.main.temp
@@ -164,6 +170,7 @@ app.get('/getWeather/location', async (req, res) => {
 
           let day3Max;
           day3.forEach(day3Forecast => {
+            day3WeatherCount.push(day3Forecast.weather)
             if (day3Forecast.main.temp > day3Max ||
                 day3Max === undefined) {
               day3Max = day3Forecast.main.temp
@@ -179,6 +186,7 @@ app.get('/getWeather/location', async (req, res) => {
 
           let day4Max;
           day4.forEach(day4Forecast => {
+            day4WeatherCount.push(day4Forecast.weather)
             if (day4Forecast.main.temp > day4Max ||
                 day4Max === undefined) {
               day4Max = day4Forecast.main.temp
@@ -194,6 +202,7 @@ app.get('/getWeather/location', async (req, res) => {
 
           let day5Max;
           day5.forEach(day5Forecast => {
+            day5WeatherCount.push(day5Forecast.weather)
             if (day5Forecast.main.temp > day5Max ||
                 day5Max === undefined) {
               day5Max = day5Forecast.main.temp
@@ -206,11 +215,11 @@ app.get('/getWeather/location', async (req, res) => {
               day5Low = day5Forecast.main.temp
             }
           })
-          let day1Obj = { hi: day1Max, low: day1Low };
-          let day2Obj = { hi: day2Max, low: day2Low };
-          let day3Obj = { hi: day3Max, low: day3Low };
-          let day4Obj = { hi: day4Max, low: day4Low };
-          let day5Obj = { hi: day5Max, low: day5Low };
+          let day1Obj = { hi: day1Max, low: day1Low, weather: day1WeatherCount };
+          let day2Obj = { hi: day2Max, low: day2Low, weather: day2WeatherCount };
+          let day3Obj = { hi: day3Max, low: day3Low, weather: day3WeatherCount };
+          let day4Obj = { hi: day4Max, low: day4Low, weather: day4WeatherCount };
+          let day5Obj = { hi: day5Max, low: day5Low, weather: day5WeatherCount };
           let fiveDayForecastData = [
             day1Obj,
             day2Obj,

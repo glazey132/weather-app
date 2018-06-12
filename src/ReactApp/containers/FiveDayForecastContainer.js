@@ -1,17 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Forecast from '../components/Forecast.js'
 
 class FiveDayForecastContainer extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { }
+		this.state = {
+			fiveDayData: null,
+			loading: true
+		};
 
 	}
 
 	async displayFiveDayForecast() {
 		try {
 			const fiveDayData = await this.props.fiveDayData;
-			console.log('the five day data ', fiveDayData);
+			console.log('does this work? ', fiveDayData[0].weather[0]);
+			this.setState({
+				fiveDayData: fiveDayData,
+				loading: false
+			})
+			console.log('the state ', this.state);
 
 			//parse data and get five objects to represent each day
 			//insert into array and then set state. import fiveday component
@@ -29,11 +38,27 @@ class FiveDayForecastContainer extends React.Component {
 	}
 
 	render() {
-		return (
-			<div className='five-day-container'>
-				five day
-			</div>
-		)
+		if(!this.state.loading) {
+			return (
+				<div className='five-day-container'>
+					{this.state.fiveDayData.map((forecast, index) => (
+						<Forecast
+							key={index}
+							className='forecast'
+							imageDescription={forecast.weather[0]}
+							hiTemp={forecast.hi}
+							lowTemp={forecast.low}
+						/>
+					))}
+				</div>
+			)
+		} else {
+			return (
+				<div>
+					loading...
+				</div>
+			)
+		}
 	}
 }
 

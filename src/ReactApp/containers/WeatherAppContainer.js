@@ -28,7 +28,6 @@ class WeatherAppContainer extends React.Component {
 					const error = 'failed to load weather info from backend';
 					this.props.onWeatherFail(error)
 				} else {
-					console.log('from backend... ', backendCall);
 					let currentWeatherData = backendCall.data.currentWeatherData.main;
 					let currentWeatherInfo = backendCall.data.currentWeatherData.weather[0];
 					let fiveDayForecast = backendCall.data.fiveDayForecast;
@@ -69,7 +68,7 @@ class WeatherAppContainer extends React.Component {
 					<div className='weather-container'>
 						<div className='top-row'>
 							<div className='left-column'>
-								<CurrentWeatherImage/>
+								<CurrentWeatherImage weatherInfo={this.props.currentWeatherDataInfo}/>
 							</div>
 							<div className='right-column'>
 								<CurrentWeatherInfoContainer/>

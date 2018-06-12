@@ -23,7 +23,6 @@ function weatherReducer(state = initialState, action) {
 				isWeatherLoading: true
 			};
 		case types.FETCH_WEATHER_SUCCESS:
-		console.log('fetch weather success in reducer here is weather data?? --> ** --> ', action.payload);
 			return {
 				...state,
 				isWeatherLoading: false,

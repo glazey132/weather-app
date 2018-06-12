@@ -19,9 +19,7 @@ class CurrentWeatherInfoContainer extends React.Component {
 			const weatherData = await this.props.currentWeatherData;
 			const windInfo = await this.props.currentWindData;
 			const weatherInfo = await this.props.currentWeatherInfo;
-			console.log('is the info here? ', weatherInfo);
-			console.log('is the wind info here? ', windInfo);
-			console.log('is the weather specs here  ? ', weatherInfo);
+
 			let temp = weatherData.temp;
 			let humidity = weatherData.humidity;
 			let windSpeed = windInfo.speed;
@@ -61,7 +59,6 @@ class CurrentWeatherInfoContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-	console.log('the state in mapstate 2 props in info container ***&*&* ', state);
 	return {
 		currentWeatherData: state.weatherReducer.currentWeatherData,
 		currentWindData: state.weatherReducer.currentWindData,
