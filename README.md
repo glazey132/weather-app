@@ -1,3 +1,9 @@
+# Weather Man
+
+![](./assets/weather-app-example.png)
+
+## Description
+
 This project is a local weather web application powered by OpenWeatherMap's API and locationIQ's API.
 
 I developed this project using React.js and Redux for the frontend and Node.js / Express to create a backend server that collects user weather data.
