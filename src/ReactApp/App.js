@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import WeatherAppContainer from "./containers/WeatherAppContainer.js";
+import CircularLoadingIcon from "./components/CircularLoadingIcon.js";
 import { connect } from "react-redux";
 
 import {
@@ -34,13 +35,9 @@ class App extends React.Component {
     if (this.props.isLocationLoading) {
       return (
         <div className="location-loading-screen">
-          <span
-            style={{
-              textAlign: "center"
-            }}
-          >
-            <h3>Loading your location...</h3>
-          </span>
+          <div className="loading-message">
+            <CircularLoadingIcon />
+          </div>
         </div>
       );
     } else if (!this.props.isLocationLoading) {
