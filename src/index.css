@@ -1,9 +1,10 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
   width: 100%;
-  min-height:100%; /* needed for container min-height */
+  min-height: 100%;
 }
 
 #root {
@@ -71,7 +72,7 @@ html, body {
   min-height: 100%;
   min-width: 100%;
   font-family: "Arial Black", Gadget, sans-serif;
-  color: #FFFE00;
+  color: #fffe00;
 }
 
 .app-screen {
@@ -83,7 +84,7 @@ html, body {
   min-height: 100%;
   min-width: 100%;
   flex-direction: column;
-  background: #87CEFA;
+  background: #87cefa;
   position: absolute;
 }
 

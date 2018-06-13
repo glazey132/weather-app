@@ -1,16 +1,16 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 var cityListSchema = mongoose.Schema({
-	id: {
-		type: String
-	},
-	name: {
-		type: String
-	}
-})
+  id: {
+    type: String
+  },
+  name: {
+    type: String
+  }
+});
 
-var CityListItem = mongoose.model('Citylist', cityListSchema, 'citylist');
+var CityListItem = mongoose.model("Citylist", cityListSchema, "citylist");
 
 module.exports = {
-	CityListItem
+  CityListItem
 };
