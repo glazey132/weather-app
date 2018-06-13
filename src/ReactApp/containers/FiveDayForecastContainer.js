@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Forecast from "../components/Forecast.js";
 
@@ -14,7 +15,6 @@ class FiveDayForecastContainer extends React.Component {
   async displayFiveDayForecast() {
     try {
       const fiveDayData = await this.props.fiveDayData;
-      console.log("does this work? ", fiveDayData[0].weather[0]);
       this.setState({
         fiveDayData: fiveDayData,
         loading: false
@@ -53,6 +53,10 @@ const mapStateToProps = state => {
   return {
     fiveDayData: state.weatherReducer.fiveDayForecast
   };
+};
+
+FiveDayForecastContainer.propTypes = {
+  fiveDayData: PropTypes.array
 };
 
 export default connect(

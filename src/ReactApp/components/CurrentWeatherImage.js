@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-// import PropTypes from 'prop-types';
-// import axios from 'axios';
+import PropTypes from "prop-types";
 
 class CurrentWeatherImage extends React.Component {
   constructor(props) {
@@ -171,9 +170,9 @@ const mapStateToProps = state => {
   };
 };
 
-// CurrentWeatherImage.propTypes = {
-// 	currentWeatherDataInfo: PropTypes.array
-// };
+CurrentWeatherImage.propTypes = {
+  currentWeatherInfo: PropTypes.object
+};
 
 export default connect(
   mapStateToProps,

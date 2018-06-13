@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 class CurrentWeatherInfoContainer extends React.Component {
@@ -68,6 +69,13 @@ const mapStateToProps = state => {
     currentWeatherInfo: state.weatherReducer.currentWeatherInfo,
     location: state.weatherReducer.location
   };
+};
+
+CurrentWeatherInfoContainer.propTypes = {
+  currentWeatherData: PropTypes.object,
+  currentWindData: PropTypes.object,
+  currentWeatherInfo: PropTypes.object,
+  location: PropTypes.array
 };
 
 export default connect(

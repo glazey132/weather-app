@@ -1,7 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 import WeatherAppContainer from "./containers/WeatherAppContainer.js";
 import { connect } from "react-redux";
-// import Button from 'material-ui/Button';
 
 import {
   fetchGeolocationSuccess,
@@ -26,7 +26,6 @@ class App extends React.Component {
           position.coords.latitude,
           position.coords.longitude
         );
-        // this.getCityInfoByPosition(position);
       }
     });
   }
@@ -47,7 +46,7 @@ class App extends React.Component {
     } else if (!this.props.isLocationLoading) {
       return (
         <div className="app-screen container-fluid">
-          <h3> Weather App </h3>
+          <h3> Weather Man </h3>
           <span style={{ color: "red" }}>{this.props.error}</span>
           <WeatherAppContainer />
         </div>
@@ -68,6 +67,11 @@ const mapDispatchToProps = dispatch => {
     onLocation: (lat, long) => dispatch(fetchGeolocationSuccess(lat, long)),
     onLocationFail: error => dispatch(fetchGeolocationFailure(error))
   };
+};
+
+App.propTypes = {
+  isLocationLoading: PropTypes.bool,
+  error: PropTypes.string
 };
 
 export default connect(

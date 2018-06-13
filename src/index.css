@@ -49,19 +49,7 @@ body {
   min-width: 100%;
 }
 
-.location-loading-screen {
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  flex-direction: column;
-  position: absolute;
-  background: pink;
-  min-height: 100%;
-  min-width: 100%;
-  font-family: "Arial Black", Gadget, sans-serif;
-  color: white;
-}
-
+.location-loading-screen,
 .weather-loading-screen {
   display: flex;
   justify-content: center;
@@ -72,7 +60,7 @@ body {
   min-height: 100%;
   min-width: 100%;
   font-family: "Arial Black", Gadget, sans-serif;
-  color: #fffe00;
+  color: white;
 }
 
 .app-screen {

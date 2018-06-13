@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class Forecast extends React.Component {
   constructor(props) {
@@ -79,5 +80,11 @@ class Forecast extends React.Component {
     );
   }
 }
+
+Forecast.propTypes = {
+  hiTemp: PropTypes.number,
+  lowTemp: PropTypes.number,
+  imageDescription: PropTypes.array
+};
 
 export default Forecast;

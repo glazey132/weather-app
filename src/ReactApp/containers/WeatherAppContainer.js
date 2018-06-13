@@ -52,20 +52,16 @@ class WeatherAppContainer extends React.Component {
     this.getCityInfoByPosition();
   }
 
-  //TODO: first load the weather and store in state in an array on
-  //page load and user search button click(redux action).
-  //Map each element in the array to a jsx <td> element in table-row-two
   render() {
     if (this.props.isWeatherLoading) {
       return (
         <div className="weather-loading-screen">
           <span
             style={{
-              textAlign: "center",
-              height: "100%"
+              textAlign: "center"
             }}
           >
-            Making your weather info aesthetically pleasing. Please wait.
+            <h3>Weather Man is checking the forecast...</h3>
           </span>
         </div>
       );
