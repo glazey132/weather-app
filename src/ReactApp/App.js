@@ -18,17 +18,22 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    navigator.geolocation.getCurrentPosition(position => {
+    this.watchId = navigator.geolocation.watchPosition(position => {
       if (!position) {
         const err = "could not get position on mount ";
         this.props.onLocationFail(err);
       } else {
+        console.log("positoin", position);
         this.props.onLocation(
           position.coords.latitude,
           position.coords.longitude
         );
       }
     });
+  }
+
+  componentWillUnmount() {
+    navigator.geolocation.clearWatch(this.watchId);
   }
 
   render() {
